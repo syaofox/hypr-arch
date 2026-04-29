@@ -48,7 +48,7 @@ run_step() {
 
 
 
-run_step "Upgrade system dependencies" "./scripts/upgrade-deps.sh"
+run_step "Upgrade system dependencies" "./scripts/upgrade-sys.sh"
 run_step "Install AUR helper" "./scripts/install-yay.sh"
 run_step "Install system dependencies" "./scripts/install-deps.sh"
 run_step "Install Hyprland" "./scripts/install-hyprland.sh"
