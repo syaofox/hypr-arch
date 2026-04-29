@@ -1,0 +1,16 @@
+#!/bin/bash
+
+choices="退出\n重启\n关机"
+chosen=$(echo -e "$choices" | wofi --dmenu -p "电源选项" -i)
+
+case "$chosen" in
+    退出)
+        command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit
+        ;;
+    重启)
+        command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown --post-cmd "systemctl reboot" || systemctl reboot
+        ;;
+    关机)
+        command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown --post-cmd "systemctl poweroff" || systemctl poweroff
+        ;;
+esac

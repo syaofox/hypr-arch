@@ -22,6 +22,7 @@ HYPRLAND_PACKAGES=(
     brightnessctl
     # polkit-kde-agent
     hyprpolkitagent
+    hyprshutdown
     sddm
 )
 

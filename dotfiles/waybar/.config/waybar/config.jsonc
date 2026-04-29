@@ -2,7 +2,7 @@
   "position": "top",
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["network","cpu", "memory", "pulseaudio", "clock", "tray"],
+  "modules-right": ["network","cpu", "memory", "pulseaudio", "clock", "tray", "custom/power"],
   "clock": {
     "format": "<span foreground='#f5c2e7'>  </span>{:%a %d %H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
@@ -50,5 +50,11 @@
     "tray": {
         "icon-size": 13,
         "spacing": 10
+    },
+
+    "custom/power": {
+        "format": "  ",
+        "tooltip": "电源菜单",
+        "on-click": "powermenu"
     }
 }
