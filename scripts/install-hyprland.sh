@@ -10,8 +10,7 @@ HYPRLAND_PACKAGES=(
     xdg-desktop-portal
     kitty
     dolphin
-    wofi
-    polkit-kde-agent
+    wofi    
     qt5-wayland
     qt6-wayland
     waybar
@@ -21,6 +20,8 @@ HYPRLAND_PACKAGES=(
     hyprpaper
     hypridle
     brightnessctl
+    polkit-kde-agent
+    sddm
 )
 
 log_info "Installing Hyprland and related components..."
@@ -29,19 +30,21 @@ if ! sudo pacman -S --needed --noconfirm "${HYPRLAND_PACKAGES[@]}"; then
     exit 1
 fi
 
-# Install SDDM display manager
-log_info "Installing SDDM display manager..."
-if ! sudo pacman -S --needed --noconfirm sddm; then
-    log_error "Failed to install SDDM"
+# Enable polkit service
+log_info "Enabling polkit service..."
+systemctl enable polkit || {
+    log_error "Failed to enable polkit service"
     exit 1
-fi
+}
 
-# Enable services
-log_info "Enabling system services..."
+
+# Enable SDDM service
+log_info "Enabling SDDM service..."
 sudo systemctl enable sddm || {
     log_error "Failed to enable SDDM service"
     exit 1
 }
+
 
 log_info "Hyprland installation completed!"
 exit 0
