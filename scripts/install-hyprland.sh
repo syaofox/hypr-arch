@@ -21,14 +21,23 @@ HYPRLAND_PACKAGES=(
     hypridle
     brightnessctl
     # polkit-kde-agent
-    hyprpolkitagent
-    hyprshutdown
+    hyprpolkitagent   
     sddm
 )
 
 log_info "Installing Hyprland and related components..."
 if ! sudo pacman -S --needed --noconfirm "${HYPRLAND_PACKAGES[@]}"; then
     log_error "Failed to install Hyprland packages"
+    exit 1
+fi
+
+HYPRLAND_AUR_PACKAGES=(
+    hyprshutdown
+)
+
+log_info "Installing Hyprland AUR packages..."
+if ! paru -S --needed --noconfirm "${HYPRLAND_AUR_PACKAGES[@]}"; then
+    log_error "Failed to install Hyprland AUR packages"
     exit 1
 fi
 
