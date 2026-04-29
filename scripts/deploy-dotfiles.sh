@@ -62,4 +62,10 @@ for pkg_dir in "$DOTFILES_DIR"/*/; do
 done
 
 log_info "Dotfiles deployed successfully"
+
+if command -v fish &>/dev/null; then
+    log_info "Installing fisher plugins..."
+    fish -c "fisher install" 2>/dev/null || true
+fi
+
 exit 0
