@@ -74,14 +74,14 @@ if ! sudo pacman -S --needed --noconfirm "${PACMAN_packages[@]}"; then
     exit 1
 fi
 
-log_info "Installing AUR packages via yay..."
-AUR_PACKAGES=(
-    mint-y-icons
-    mint-themes
-)
-if command -v yay >/dev/null; then
-    yay -S --needed --noconfirm "${AUR_PACKAGES[@]}" || log_warn "Some AUR packages failed to install"
-fi
+# log_info "Installing AUR packages via yay..."
+# AUR_PACKAGES=(
+#     mint-y-icons
+#     mint-themes
+# )
+# if command -v yay >/dev/null; then
+#     yay -S --needed --noconfirm "${AUR_PACKAGES[@]}" || log_warn "Some AUR packages failed to install"
+# fi
 
 log_info "System dependencies installation complete"
 exit 0
