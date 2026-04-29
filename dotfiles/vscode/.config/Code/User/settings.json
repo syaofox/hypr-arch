@@ -1,0 +1,8 @@
+{
+    "workbench.colorTheme": "Visual Studio Light",
+    "security.workspace.trust.untrustedFiles": "open",
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "files.autoSave": "afterDelay"
+}
