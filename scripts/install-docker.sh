@@ -6,8 +6,8 @@ source "$(dirname "$0")/utils.sh"
 install_docker() {
     log_step "Installing Docker & Docker Compose..."
 
-    log_info "Installing docker and docker-compose..."
-    sudo pacman -S --needed --noconfirm docker docker-compose
+    log_info "Installing docker and docker compose plugin..."
+    sudo pacman -S --needed --noconfirm docker
 
     log_info "Enabling and starting docker service..."
     sudo systemctl enable --now docker.service

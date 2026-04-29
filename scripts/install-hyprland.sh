@@ -7,6 +7,7 @@ log_step "Installing Hyprland and related components..."
 HYPRLAND_PACKAGES=(
     hyprland
     xdg-desktop-portal-hyprland
+    xdg-desktop-portal
     kitty
     dolphin
     wofi
