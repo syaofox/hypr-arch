@@ -2,9 +2,7 @@
 # System Kernel Parameter Optimization Script (Arch Linux / Generic)
 # Version: 1.0
 # Description:
-#   - Optimize swappiness for SSD/NVMe
 #   - Increase inotify watcher limit (for IDEs, file watchers)
-#   - Increase max map count (for Elasticsearch, game servers)
 # Usage:
 #   ./sysctl.sh                    # Apply optimizations
 #   ./sysctl.sh --chroot           # Write files only, skip runtime apply
@@ -42,37 +40,25 @@ run_sysctl_optimization() {
     log_info "Backing up existing configs to $BACKUP_DIR"
     cp -a /etc/sysctl.d/ "$BACKUP_DIR/" 2>/dev/null || true
 
-    cat << 'EOF' > /etc/sysctl.d/99-swappiness.conf
-# Lower swappiness for SSD/NVMe systems
-vm.swappiness=10
-EOF
-
-    cat << 'EOF' > /etc/sysctl.d/99-developer-optimizations.conf
-# Increase inotify watcher limit (file watchers, IDEs)
+    cat << 'EOF' > /etc/sysctl.d/99-inotify.conf
+# Increase inotify watcher limit (IDEs, file watchers, Neovim)
 fs.inotify.max_user_watches=524288
-# Increase max map count (Elasticsearch, game servers)
-vm.max_map_count=262144
 EOF
 
-    log_info "Configuration files written:"
-    log_info "  /etc/sysctl.d/99-swappiness.conf"
-    log_info "  /etc/sysctl.d/99-developer-optimizations.conf"
+    log_info "Configuration file written: /etc/sysctl.d/99-inotify.conf"
 
     if ! $CHROOT_MODE; then
-        log_info "Applying sysctl parameters..."
-        sysctl -p /etc/sysctl.d/99-swappiness.conf 2>&1 | sed 's/^/  /' || log_warn "Failed to apply swappiness"
-        sysctl -p /etc/sysctl.d/99-developer-optimizations.conf 2>&1 | sed 's/^/  /' || log_warn "Failed to apply developer optimizations"
-        log_info "Parameters applied to running kernel"
+        log_info "Applying sysctl parameter..."
+        sysctl -p /etc/sysctl.d/99-inotify.conf 2>&1 | sed 's/^/  /' || log_warn "Failed to apply inotify limit"
+        log_info "Parameter applied to running kernel"
     else
-        log_info "Chroot mode: parameters will be applied after reboot"
+        log_info "Chroot mode: parameter will be applied after reboot"
     fi
 
     log_info "=========================================="
     log_info "System optimization completed!"
     log_info "=========================================="
-    log_info "Verify with: sysctl vm.swappiness"
     log_info "Verify with: sysctl fs.inotify.max_user_watches"
-    log_info "Verify with: sysctl vm.max_map_count"
 }
 
 log_step()  { echo -e "\n${CYAN}==> $1${NC}"; }
