@@ -5,6 +5,15 @@ set -gx HF_ENDPOINT https://hf-mirror.com
 set -gx UV_CACHE_DIR "/mnt/github/.caches/uv"
 set -gx BAT_THEME "Nord"
 
+set -gx NVM_DIR "$HOME/.config/nvm"
+if test -s "$NVM_DIR/nvm.sh"
+    source "$NVM_DIR/nvm.sh"  # This loads nvm
+end
+if test -s "$NVM_DIR/bash_completion"
+    source "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+end
+
+
 # 路径设置 (推荐用 fish_add_path，简洁且自动去重)
 fish_add_path "$HOME/.local/bin"
 if test -d $HOME/.opencode/bin

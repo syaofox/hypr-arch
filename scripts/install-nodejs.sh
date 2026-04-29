@@ -12,7 +12,9 @@ fi
 
 export NVM_DIR="$HOME/.config/nvm"
 
-if [ ! -d "$NVM_DIR" ]; then
+mkdir -p "$NVM_DIR"
+
+if [ ! -s "$NVM_DIR/nvm.sh" ]; then
     log_info "Installing nvm..."
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
 fi
