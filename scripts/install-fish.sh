@@ -16,5 +16,8 @@ if ! chsh -s /usr/bin/fish; then
     exit 1
 fi
 
+log_info "Installing fisher plugins..."
+fish -c "fisher install" 2>/dev/null || true
+
 log_info "fish installed successfully"
 exit 0
