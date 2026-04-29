@@ -7,6 +7,20 @@ set -gx BAT_THEME "Nord"
 
 set -gx NVM_DIR "$HOME/.config/nvm"
 
+# FZF 配置
+set -gx FZF_DEFAULT_COMMAND "fd --hidden --strip-cwd-prefix --exclude .git"
+set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+set -gx FZF_ALT_C_COMMAND "fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+# FZF 补全函数
+function _fzf_compgen_path
+    fd --hidden --exclude .git . $argv[1]
+end
+
+function _fzf_compgen_dir
+    fd --type=d --hidden --exclude .git . $argv[1]
+end
+
 
 # 路径设置 (推荐用 fish_add_path，简洁且自动去重)
 fish_add_path "$HOME/.local/bin"
@@ -48,5 +62,13 @@ if status is-interactive
             builtin cd -- "$cwd"
         end
         rm -f -- "$tmp"
+    end
+
+    # fz-menu 函数
+    function fz-menu
+        fzf --multi \
+            --height 50% --layout=reverse --border \
+            --header "➜ Ctrl-A:全选 | Ctrl-D:取消 | Ctrl-R:反选" \
+            --bind "ctrl-a:select-all,ctrl-d:deselect-all,ctrl-r:toggle-all"
     end
 end
