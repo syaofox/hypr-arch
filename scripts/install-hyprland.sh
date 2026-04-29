@@ -20,7 +20,8 @@ HYPRLAND_PACKAGES=(
     hyprpaper
     hypridle
     brightnessctl
-    polkit-kde-agent
+    # polkit-kde-agent
+    hyprpolkitagent
     sddm
 )
 
@@ -31,11 +32,11 @@ if ! sudo pacman -S --needed --noconfirm "${HYPRLAND_PACKAGES[@]}"; then
 fi
 
 # Enable polkit service
-log_info "Enabling polkit service..."
-systemctl enable polkit || {
-    log_error "Failed to enable polkit service"
-    exit 1
-}
+# log_info "Enabling polkit service..."
+# systemctl enable polkit || {
+#     log_error "Failed to enable polkit service"
+#     exit 1
+# }
 
 
 # Enable SDDM service
