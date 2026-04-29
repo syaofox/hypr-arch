@@ -36,7 +36,7 @@ HYPRLAND_AUR_PACKAGES=(
 )
 
 log_info "Installing Hyprland AUR packages..."
-if ! paru -S --needed --noconfirm "${HYPRLAND_AUR_PACKAGES[@]}"; then
+if ! yay -S --needed --noconfirm "${HYPRLAND_AUR_PACKAGES[@]}"; then
     log_error "Failed to install Hyprland AUR packages"
     exit 1
 fi
